@@ -19,7 +19,7 @@
      <widget class="QWidget" name="control_panel_widget" native="true"/>
     </item>
     <item>
-     <widget class="Open3DWidget" name="openGLWidget"/>
+     <widget class="PyVistaWidget" name="pyVistaWidget"/>
     </item>
    </layout>
   </widget>
@@ -29,7 +29,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -58,13 +58,16 @@
    </widget>
    <widget class="QMenu" name="menuOpen3D">
     <property name="title">
-     <string>Open3D</string>
+     <string>PyVista</string>
     </property>
+    <addaction name="actionExport"/>
+    <addaction name="actionExport_as_PNG"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionAbout_SigmaFold"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSimulation"/>
@@ -118,12 +121,27 @@
     <string>Parameters...</string>
    </property>
   </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="actionExport_as_PNG">
+   <property name="text">
+    <string>Export as PNG</string>
+   </property>
+  </action>
+  <action name="actionAbout_SigmaFold">
+   <property name="text">
+    <string>About SigmaFold</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Open3DWidget</class>
+   <class>PyVistaWidget</class>
    <extends>QOpenGLWidget</extends>
-   <header>Open3DWidget</header>
+   <header>PyVistaWidget</header>
   </customwidget>
  </customwidgets>
  <resources/>
