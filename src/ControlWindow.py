@@ -8,9 +8,11 @@ Created on Wed Oct 22 01:21:22 2025
 
 import os
 import sys
+import numpy as np
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QFileDialog
 from Dialog import Dialog
+from Molecule import Molecule
 
 class ControlWindow(QMainWindow):
     def __init__(self):
@@ -30,10 +32,27 @@ class ControlWindow(QMainWindow):
         # connecting menu actions (signals to slots)
         self.actionExport_as_PNG.triggered.connect(self.on_export_png)
         self.actionExit.triggered.connect(self.on_exit)
+        self.actionOpen.triggered.connect(self.on_open)
+        
+        # other variables
+        self.molecules = np.array([])
     
     def on_open(self):
-        return
-    
+        molecule = Molecule()
+        filename, _ = QFileDialog.getOpenFileName(
+                self,
+                "Open Molecule File",
+                "",
+                "Mol Files (*.mol);;All Files (*)"
+            )
+        self.molecules = np.append(self.molecules, molecule.load_mol(filename))
+        if filename:
+            # clean up file name
+            clean_filename = os.path.basename(filename)
+            self.molecules_list.addItem(clean_filename)
+        else:
+            print("Invalid file name!")
+        
     def on_save(self):
         return
     

@@ -16,7 +16,54 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QWidget" name="control_panel_widget" native="true"/>
+     <widget class="QWidget" name="control_panel_widget" native="true">
+      <widget class="QListWidget" name="molecules_list">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>381</width>
+         <height>61</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="loaded_molecules_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>111</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Loaded molecules</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="molecule_info_label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>111</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Molecule info</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="molecule_info_table">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>381</width>
+         <height>101</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
     </item>
     <item>
      <widget class="PyVistaWidget" name="pyVistaWidget"/>
@@ -29,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

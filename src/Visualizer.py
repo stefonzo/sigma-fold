@@ -1,4 +1,6 @@
+# %%
 #!/usr/bin/env python3
+
 # -*- coding: utf-8 -*-
 """
 Created on Thu Oct 23 00:09:57 2025
@@ -7,7 +9,6 @@ Created on Thu Oct 23 00:09:57 2025
 """
 
 import pyvista as pv
-import numpy as np
 
 class Visualizer():
     def __init__(self, widget):
@@ -20,31 +21,15 @@ class Visualizer():
         self.geometries = {}
         self.camera_settings = None
         
-        # PyVista plotter (will be created lazily)
-        self.plotter = None
-        self.initialized = False
-        
-    def ensure_initialized(self):
-        if not self.initialized:
-            self.width = self.widget.width() if self.widget.width() > 0 else 800
-            self.height = self.widget.height() if self.widget.height() > 0 else 600
-            
-            # Create offscreen plotter
-            self.plotter = pv.Plotter(off_screen=True, window_size=[self.width, self.height])
-            self.plotter.set_background(self.background_color)
-            
-            # Add geometries
-            for name, geometry in self.geometries.items():
-                self.plotter.add_mesh(geometry)
-            
-            self.initialized = True
+        # Create offscreen plotter immediately
+        self.plotter = pv.Plotter(off_screen=True, window_size=[self.width, self.height])
+        self.plotter.set_background(self.background_color)
     
     def on_resize(self, width, height):
         self.width = width
         self.height = height
     
     def render(self):
-        self.ensure_initialized()
         # Render and return as numpy array
         img = self.plotter.screenshot(return_img=True, transparent_background=False)
         return img  # Returns numpy array directly!
