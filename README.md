@@ -7,3 +7,5 @@ libs used:
     -rdkit
     -qt
     -PyVista
+    
+https://www.uniprot.org/uniprotkb/Q9UK79/entry # her2 fasta file for testing is from here
