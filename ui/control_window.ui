@@ -63,10 +63,82 @@
         </rect>
        </property>
       </widget>
+      <widget class="PyVistaWidget" name="pyVistaWidget">
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>20</y>
+         <width>381</width>
+         <height>481</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="startSimButton">
+       <property name="geometry">
+        <rect>
+         <x>440</x>
+         <y>510</y>
+         <width>80</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="stepSimButton">
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>510</y>
+         <width>80</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Step</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="stopSimButton">
+       <property name="geometry">
+        <rect>
+         <x>660</x>
+         <y>510</y>
+         <width>80</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Stop</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="simViewerLabel">
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>0</y>
+         <width>91</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Simulation View</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="visualizeSimMolecules">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>230</y>
+         <width>131</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Visualize Molecules</string>
+       </property>
+      </widget>
      </widget>
-    </item>
-    <item>
-     <widget class="PyVistaWidget" name="pyVistaWidget"/>
     </item>
    </layout>
   </widget>

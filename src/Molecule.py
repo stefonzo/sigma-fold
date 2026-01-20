@@ -21,6 +21,7 @@ class Molecule():
         self.num_atoms = None
         self.name = None
         self.description = None
+        self.handle = None # used in ControlWindow.py (Qt stuff)
         
     def atoms_from_rdkitmol(self): 
         AllChem.EmbedMolecule(self.rdkit_mol)

@@ -6,9 +6,11 @@ Created on Wed Oct 22 01:21:22 2025
 @author: stefonzo
 """
 
+import App
 import os
 import sys
 import numpy as np
+import Visualizer as vis
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QFileDialog
 from Dialog import Dialog
@@ -27,33 +29,38 @@ class ControlWindow(QMainWindow):
         # load ui file 
         path = os.path.dirname(__file__)
         path = os.path.join(path, "..", "ui", "control_window.ui")
-        print(path)
         uic.loadUi(path, self)
         
-        # connecting menu actions (signals to slots)
+        # menu actions (signals to slots)
         self.actionExport_as_PNG.triggered.connect(self.on_export_png)
         self.actionExit.triggered.connect(self.on_exit)
         self.actionMolfile.triggered.connect(self.on_open_molfile)
         self.actionFasta.triggered.connect(self.on_open_fasta)
-        
-        # other variables
-        self.molecules = np.array([])
-        self.proteins = np.array([])
+        # molecule buttons
+        self.visualizeSimMolecules.clicked.connect(self.on_visualize_molecules)
+        # sim buttons
+        self.startSimButton.clicked.connect(self.dummy)
+        self.stepSimButton.clicked.connect(self.dummy)
+        self.stopSimButton.clicked.connect(self.dummy)
         
     def on_open_molfile(self):
-        molecule = Molecule()
         filename, _ = QFileDialog.getOpenFileName(
                 self,
                 "Open Molecule File",
                 "",
                 "Mol Files (*.mol);;All Files (*)"
             )
-        self.molecules = np.append(self.molecules, molecule.load_mol(filename))
         if filename:
+            molecule = Molecule()
+            molecule.load_mol(filename) # todo: add error handling for load_mol() method
+            clean_filename = os.path.basename(filename)
+            molecule.handle = clean_filename
+            App.molecules = np.append(App.molecules, molecule)
             clean_filename = os.path.basename(filename)
             self.molecules_list.addItem(clean_filename)
         else:
             print("Invalid file name!")
+        
             
     def on_open_fasta(self):
         fasta_protein = Protein()
@@ -63,13 +70,12 @@ class ControlWindow(QMainWindow):
                 "",
                 "Fasta Files (*.fasta);;All Files (*)"
             )
-        self.proteins = np.append(self.proteins, fasta_protein.protein_from_fasta(filename))
+        App.proteins = np.append(App.proteins, fasta_protein.protein_from_fasta(filename))
         if filename:
             clean_filename = os.path.basename(filename)
             self.molecules_list.addItem(clean_filename)
         else:
             print("Invalid file name!")
-        print(str(fasta_protein))
         
     def on_save(self):
         return
@@ -105,5 +111,16 @@ class ControlWindow(QMainWindow):
                 
     def on_exit(self):
         self.close()
+        
+    def on_visualize_molecules(self): # todo: use molecule handles to select which molecule is visualized (handles can be obtained from QWidget)
+        for molecule in App.molecules:
+            self.pyVistaWidget.widget_visualizer.add_atoms_to_plotter(molecule)
+        self.pyVistaWidget.widget_visualizer.plotter.reset_camera()
+        self.pyVistaWidget.widget_visualizer.render()
+        self.pyVistaWidget.update()
+        
+    def dummy(self):
+        print("dummy")
+        return
     
     

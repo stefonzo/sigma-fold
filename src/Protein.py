@@ -1,5 +1,4 @@
 from Molecule import Molecule
-from rdkit import Chem
 from Bio import SeqIO
 
 class Protein(Molecule):
@@ -10,3 +9,5 @@ class Protein(Molecule):
     def protein_from_fasta(self, filename):
         fasta_file = SeqIO.read(filename, "fasta")
         self.fasta_string = fasta_file.format("fasta")
+        
+    # 
