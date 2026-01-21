@@ -33,7 +33,7 @@ class PyVistaWidget(QWidget):  # Changed from QOpenGLWidget to QWidget
         height, width, channels = np_array.shape
         bytesPerLine = channels * width
         
-        # Create QImage - need to convert to bytes
+        # Create QImage - need to convert to bytes (this is needed for custom Qt widget!)
         qimage = QImage(np_array.tobytes(), width, height, bytesPerLine, QImage.Format.Format_RGB888)
         scaled_qimage = qimage.scaled(self.width(), self.height())
         

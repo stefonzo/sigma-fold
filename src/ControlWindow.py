@@ -10,7 +10,6 @@ import App
 import os
 import sys
 import numpy as np
-import Visualizer as vis
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QFileDialog
 from Dialog import Dialog
@@ -88,26 +87,7 @@ class ControlWindow(QMainWindow):
     
     def on_export_png(self):
         export_dialog = Dialog("export_png_dialog.ui", self)
-        
-        if export_dialog.exec() == Dialog.DialogCode.Accepted:
-            width = export_dialog.widthSpinBox.value()
-            height = export_dialog.heightSpinBox.value()
-            
-            filename, _ = QFileDialog.getSaveFileName(self, "Export PNG", "", "PNG Files (*.png)")
-            
-            if filename:
-                if not filename.endswith(".png"):
-                    filename += ".png"
-                
-                # Get numpy array directly from PyVista
-                np_array = self.pyVistaWidget.widget_visualizer.export_to_png(width, height)
-                
-                # Save with PIL
-                from PIL import Image
-                pil_image = Image.fromarray(np_array)
-                pil_image.save(filename)
-                
-                print(f"Exported {width}x{height} PNG to: {filename}")
+        pass
                 
     def on_exit(self):
         self.close()
