@@ -12,9 +12,10 @@ import sys
 import numpy as np
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QFileDialog
-from Dialog import Dialog
+import Dialog
 from Molecule import Molecule
-from Protein import Protein
+import Protein
+from InteractiveVisualizer import InteractiveVisualizer
 
 class ControlWindow(QMainWindow):
     def __init__(self):
@@ -35,12 +36,16 @@ class ControlWindow(QMainWindow):
         self.actionExit.triggered.connect(self.on_exit)
         self.actionMolfile.triggered.connect(self.on_open_molfile)
         self.actionFasta.triggered.connect(self.on_open_fasta)
+        self.actionOpen_PyVista_Window.triggered.connect(self.on_open_PyVista_window)
+        
         # molecule buttons
         self.visualizeSimMolecules.clicked.connect(self.on_visualize_molecules)
         # sim buttons
         self.startSimButton.clicked.connect(self.dummy)
         self.stepSimButton.clicked.connect(self.dummy)
         self.stopSimButton.clicked.connect(self.dummy)
+        
+        self.interactive_visualizer = None
         
     def on_open_molfile(self):
         filename, _ = QFileDialog.getOpenFileName(
@@ -86,8 +91,12 @@ class ControlWindow(QMainWindow):
         return
     
     def on_export_png(self):
-        export_dialog = Dialog("export_png_dialog.ui", self)
+        #export_dialog = Dialog("export_png_dialog.ui", self)
         pass
+    
+    def on_open_PyVista_window(self):
+        self.interactive_visualizer = InteractiveVisualizer(App.molecules)
+        self.interactive_visualizer.open_PyVista_window()
                 
     def on_exit(self):
         self.close()

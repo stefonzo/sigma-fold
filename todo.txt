@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jan 22 17:32:43 2026
+
+@author: stephen
+"""
+
+Todo list:
+    -implement proper unit testing
+    -begin test driven development for everything below
+    -fix bug where only a single pyvista window can render a molecule (I want multiple pyvista window rendering)
+    -create unit tests for Molecule class
+    -change gui layout (control_window.ui) to better reflect recent changes to code
+    -begin fleshing out Protein class
+        -get linear polypeptide conformation (getting an accurate folded conformation with rdkit segfaults sigma-fold :p and I want to start from linear conformation and have my physics simulation generate folded conformations)
+    -create unit tests for Protein class
+    -look into creating methods to pickle Molecule and Protein data
+    -look into methods to deserialize pickled Molecule and Protein data
+    -more unit tests for these methods
+    -begin looking into MPI/CUDA libs for python (sigma-fold intends to be as modular as possible and should support both of these forms of computation for physics simulation)
+    

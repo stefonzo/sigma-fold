@@ -10,4 +10,3 @@ class Protein(Molecule):
         fasta_file = SeqIO.read(filename, "fasta")
         self.fasta_string = fasta_file.format("fasta")
         
-    # 

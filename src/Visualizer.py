@@ -9,21 +9,22 @@ Created on Thu Oct 23 00:09:57 2025
 """
 
 import pyvista as pv
+import App
 
 radius_scale = 1.0
 
 class Visualizer():
-    def __init__(self, widget):
-        self.widget = widget
+    def __init__(self, offscreen=True):
         self.width = 800 # see if I can make this more flexible (put this under settings)
         self.height = 600
+        self.offscreen = offscreen
         
         # Scene data
-        self.background_color = [0.2, 0.3, 0.4]  # RGB only for PyVista
+        self.background_color = App.window_background_color  # RGB only for PyVista
         self.camera_settings = None
         
         # Create offscreen plotter immediately
-        self.plotter = pv.Plotter(off_screen=True, window_size=[self.width, self.height])
+        self.plotter = pv.Plotter(off_screen=self.offscreen, window_size=[self.width, self.height])
         self.plotter.set_background(self.background_color)
     
     def on_resize(self, width, height):

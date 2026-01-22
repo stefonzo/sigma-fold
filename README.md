@@ -8,4 +8,5 @@ libs used:
     -qt
     -PyVista
     -biopython
+    -pytest
 https://www.uniprot.org/uniprotkb/Q9UK79/entry # her2 fasta file for testing is from here

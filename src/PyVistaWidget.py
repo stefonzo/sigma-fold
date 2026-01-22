@@ -14,7 +14,7 @@ import Visualizer as vis
 class PyVistaWidget(QWidget):  # Changed from QOpenGLWidget to QWidget
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.widget_visualizer = vis.Visualizer(self)
+        self.widget_visualizer = vis.Visualizer()
         
     def resizeEvent(self, event):
         super().resizeEvent(event)

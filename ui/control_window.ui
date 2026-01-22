@@ -188,6 +188,7 @@
     </property>
     <addaction name="actionExport"/>
     <addaction name="actionExport_as_PNG"/>
+    <addaction name="actionOpen_PyVista_Window"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -265,6 +266,11 @@
   <action name="actionFasta">
    <property name="text">
     <string>fasta</string>
+   </property>
+  </action>
+  <action name="actionOpen_PyVista_Window">
+   <property name="text">
+    <string>Open PyVista Window</string>
    </property>
   </action>
  </widget>

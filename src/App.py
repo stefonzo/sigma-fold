@@ -12,5 +12,6 @@ Contains application information. Used with ControlWindow singleton.
 
 import numpy as np
 
+window_background_color = [0.2, 0.3, 0.4]
 molecules = np.array([])
 proteins = np.array([])
