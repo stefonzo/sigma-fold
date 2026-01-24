@@ -11,18 +11,20 @@ from PyQt6.QtGui import QImage, QPainter
 from PyQt6.QtWidgets import QWidget
 import Visualizer as vis
 
-class PyVistaWidget(QWidget):  # Changed from QOpenGLWidget to QWidget
+class PyVistaWidget(QWidget):  
     def __init__(self, parent=None):
+        """Used to display pyvista visualizer to qt ControlWindow"""
         super().__init__(parent)
         self.widget_visualizer = vis.Visualizer()
         
     def resizeEvent(self, event):
+        """Called when widget in ControlWindow is resized"""
         super().resizeEvent(event)
         self.widget_visualizer.on_resize(self.width(), self.height())
         self.update()
     
     def paintEvent(self, event):
-        # Get rendered image from visualizer (already numpy array!)
+        """Updates widget display"""
         np_array = self.widget_visualizer.render()
         
         # Ensure array is contiguous in memory (required for QImage)

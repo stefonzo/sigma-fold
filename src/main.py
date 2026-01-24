@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import QApplication
 import ControlWindow as cw
 
 def main():
+    """Runs the QApplication and Qt control window"""
     app = QApplication([])
     control_window = cw.ControlWindow()
     control_window.show()

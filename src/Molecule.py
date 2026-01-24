@@ -12,8 +12,8 @@ from rdkit.Chem import AllChem # need this to use Chem.rdMolDescriptors.CalcMolF
 import numpy as np
 
 class Molecule():
-    """Wrapper for rdkit Mol object and contains custom representations of data for simulation."""
     def __init__(self):
+        """Wrapper for rdkit Mol object and contains custom representations of data for simulation"""
         self.rdkit_mol = None
         self.atoms = np.array([])
         self.bonds = np.array([])
@@ -24,6 +24,7 @@ class Molecule():
         self.handle = None # used in ControlWindow.py (Qt stuff)
         
     def atoms_from_rdkitmol(self): 
+        """Gets conformer from self.rdkit_mol and uses conformer's atomic symbols and atomic coordinates to populate atoms in self.atoms"""
         AllChem.EmbedMolecule(self.rdkit_mol)
         AllChem.UFFOptimizeMolecule(self.rdkit_mol)
         self.rdkit_mol.GetConformer()
@@ -32,7 +33,7 @@ class Molecule():
             symbol = atom.GetSymbol()
             sim_atom = None
             if symbol in atoms:
-                sim_atom = atoms[symbol].copy()
+                sim_atom = atoms[symbol].copy() # need to use copy with a dictionary entry otherwise I'll just be using the same reference across atoms...?
             else:
                 print(f"Atom not recognized: {symbol}")
                 continue
@@ -41,10 +42,12 @@ class Molecule():
             sim_atom["pos"] = dict_pos # use position data for value in dict
             self.atoms = np.append(self.atoms, sim_atom)
     
-    def bonds_from_rdkitmol(self): # need to figure out how I'll format this info (look into rdmol api)
+    def bonds_from_rdkitmol(self): 
+        """Populates self.bonds with bond information from self.rdkit_mol"""
         return np.array([])
         
     def load_mol(self, path):
+        """Populates self.rdkit_mol from a single molfile"""
         self.rdkit_mol = Chem.MolFromMolFile(path)
         if self.rdkit_mol is None: # todo: better error handling
             raise ValueError(f"Could not parse molecule from file: {path}")

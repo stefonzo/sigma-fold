@@ -9,6 +9,7 @@ Created on Sat Oct 25 19:57:33 2025
 
 import numpy as np
 
+"""Dictionary used to store atomic information."""
 atoms = {
     "H": {"symbol" : "H", "mass": 1.0080, "radius": 1.20, "pos": np.array([0.0, 0.0, 0.0]), "vel": np.array([0.0, 0.0, 0.0]), "acc": np.array([0.0, 0.0, 0.0]), "force" : np.array([0.0, 0.0, 0.0]), "charge" : 0},
     "C": {"symbol" : "C", "mass": 12.011, "radius": 1.70, "pos": np.array([0.0, 0.0, 0.0]), "vel": np.array([0.0, 0.0, 0.0]), "acc": np.array([0.0, 0.0, 0.0]), "force" : np.array([0.0, 0.0, 0.0]), "charge" : 0},

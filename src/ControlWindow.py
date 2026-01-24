@@ -12,12 +12,12 @@ import sys
 import numpy as np
 from PyQt6 import uic
 from PyQt6.QtWidgets import QMainWindow, QFileDialog
-import Dialog
 from Molecule import Molecule
 import Protein
 from InteractiveVisualizer import InteractiveVisualizer
 
 class ControlWindow(QMainWindow):
+    """Interface/wrapper for Qt window that is used for sigma-fold application."""
     def __init__(self):
         super().__init__()
         
@@ -48,6 +48,7 @@ class ControlWindow(QMainWindow):
         self.interactive_visualizer = None
         
     def on_open_molfile(self):
+        """For menu action: File -> Open -> molfile"""
         filename, _ = QFileDialog.getOpenFileName(
                 self,
                 "Open Molecule File",
@@ -67,6 +68,7 @@ class ControlWindow(QMainWindow):
         
             
     def on_open_fasta(self):
+        """For menu action: File -> Open -> fasta"""
         fasta_protein = Protein()
         filename, _= QFileDialog().getOpenFileName(
                 self,
@@ -95,13 +97,15 @@ class ControlWindow(QMainWindow):
         pass
     
     def on_open_PyVista_window(self):
+        """For menu action: PyVista -> Open PyVista Window"""
         self.interactive_visualizer = InteractiveVisualizer(App.molecules)
         self.interactive_visualizer.open_PyVista_window()
                 
     def on_exit(self):
         self.close()
         
-    def on_visualize_molecules(self): # todo: use molecule handles to select which molecule is visualized (handles can be obtained from QWidget)
+    def on_visualize_molecules(self): 
+        """For QPushButton: visualizeSimMolecules"""
         for molecule in App.molecules:
             self.pyVistaWidget.widget_visualizer.add_atoms_to_plotter(molecule)
         self.pyVistaWidget.widget_visualizer.plotter.reset_camera()
@@ -109,6 +113,7 @@ class ControlWindow(QMainWindow):
         self.pyVistaWidget.update()
         
     def dummy(self):
+        """Temporary function to be used as a placeholder for qt slots"""
         print("dummy")
         return
     

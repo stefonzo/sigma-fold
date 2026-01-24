@@ -15,36 +15,38 @@ radius_scale = 1.0
 
 class Visualizer():
     def __init__(self, offscreen=True):
+        """pyvista visualizer for widget visualization, screenshotting, or offscreen rendering"""
         self.width = 800 # see if I can make this more flexible (put this under settings)
         self.height = 600
         self.offscreen = offscreen
-        
-        # Scene data
-        self.background_color = App.window_background_color  # RGB only for PyVista
+        self.background_color = App.window_background_color  
         self.camera_settings = None
         
-        # Create offscreen plotter immediately
         self.plotter = pv.Plotter(off_screen=self.offscreen, window_size=[self.width, self.height])
         self.plotter.set_background(self.background_color)
     
     def on_resize(self, width, height):
+        """Called by PyVistaWidget.resizeEvent"""
         self.width = width
         self.height = height
     
     def render(self):
-         img = self.plotter.screenshot(return_img=True, transparent_background=False) # img is a np array
-         return img  
+        """Called by PyVistaWidget.paintEvent"""
+        img = self.plotter.screenshot(return_img=True, transparent_background=False) # img is a np array
+        return img  
     
     def export_to_png(self, width, height):
         return self.plotter.screenshot(return_img=True, transparent_background=False)
     
     def get_sphere_mesh_from_atom(self, atom):
+        """Returns pyvista.PolyData using atomic information from atoms dictionary in Atoms.py"""
         atomic_radius = atom["radius"] * radius_scale
         atomic_coords = atom["pos"]
         mesh = pv.Sphere(radius=atomic_radius, center=atomic_coords)   
         return mesh 
     
     def get_color_from_atom(self, atom):
+        """Returns list of uniform floats [0.0, 1.0] to represent RGB color for atom using atomic symbol from atoms dictionary in Atoms.py"""
         if atom["symbol"] == "H":
             return [1.0, 1.0, 1.0]
         elif atom["symbol"] == "C":
@@ -60,6 +62,7 @@ class Visualizer():
             return [0.5,0.5,0.5]
     
     def add_atoms_to_plotter(self, molecule):
+        """Goes through a molecule and stores atom and color info from molecule into plotter for future rendering"""
         for atom in molecule.atoms:
             self.plotter.add_mesh(mesh=self.get_sphere_mesh_from_atom(atom), color=self.get_color_from_atom(atom))
     

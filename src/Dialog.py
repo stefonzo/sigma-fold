@@ -11,6 +11,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QDialog
 
 class Dialog(QDialog):
+    """Abstraction for QDialog class."""
     def __init__(self, ui_filename, parent=None):
         super().__init__(parent)
         
