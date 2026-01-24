@@ -10,5 +10,4 @@ class Protein(Molecule):
     def protein_from_fasta(self, filename):
         """Populates self.fasta_string with amino acid string sequence from a single fasta protein file"""
         fasta_file = SeqIO.read(filename, "fasta")
-        self.fasta_string = fasta_file.format("fasta")
-        
+        self.fasta_string = fasta_file.format("fasta")   

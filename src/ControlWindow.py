@@ -106,6 +106,8 @@ class ControlWindow(QMainWindow):
         
     def on_visualize_molecules(self): 
         """For QPushButton: visualizeSimMolecules"""
+        # get molecule from App.molecules using dict to display
+        # only render one molecule at a time!
         for molecule in App.molecules:
             self.pyVistaWidget.widget_visualizer.add_atoms_to_plotter(molecule)
         self.pyVistaWidget.widget_visualizer.plotter.reset_camera()
@@ -116,5 +118,3 @@ class ControlWindow(QMainWindow):
         """Temporary function to be used as a placeholder for qt slots"""
         print("dummy")
         return
-    
-    

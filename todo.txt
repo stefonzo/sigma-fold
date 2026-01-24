@@ -7,12 +7,11 @@ Created on Thu Jan 22 17:32:43 2026
 """
 
 Todo list:
-    -document code
     -implement proper unit testing
     -begin test driven development for everything below
     
+    -allow user to select which small molecules they'd like to visualize 
     -implement behavior for molecule_info_table (QTableWidget) in ControlWindow (display small molecule info) class
-    -finish get_color_from_atom() in Visualizer class
     -change gui layout (control_window.ui) to better reflect recent changes to code
     -use molecule handles to select which molecule is visualized (handles can be obtained from QWidget)
     -begin fleshing out Protein class

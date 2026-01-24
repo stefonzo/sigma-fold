@@ -1,4 +1,3 @@
-# %%
 #!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
@@ -11,7 +10,7 @@ Created on Thu Oct 23 00:09:57 2025
 import pyvista as pv
 import App
 
-radius_scale = 1.0
+radius_scale = 0.75
 
 class Visualizer():
     def __init__(self, offscreen=True):
@@ -42,7 +41,7 @@ class Visualizer():
         """Returns pyvista.PolyData using atomic information from atoms dictionary in Atoms.py"""
         atomic_radius = atom["radius"] * radius_scale
         atomic_coords = atom["pos"]
-        mesh = pv.Sphere(radius=atomic_radius, center=atomic_coords)   
+        mesh = pv.Sphere(radius=atomic_radius, center=atomic_coords, theta_resolution=60, phi_resolution=60)   
         return mesh 
     
     def get_color_from_atom(self, atom):
@@ -52,11 +51,11 @@ class Visualizer():
         elif atom["symbol"] == "C":
             return [0.0, 0.0, 0.0]
         elif atom["symbol"] == "O":
-            pass
+            return [1.0, 0.0, 0.0]
         elif atom["symbol"] == "P":
-            pass
+            return [0.0, 0.0, 1.0]
         elif atom["symbol"] == "N":
-            pass
+            return [0.0, 1.0, 0.0]
         else:
             print(f"color not defined for atom with symbol: {atom["symbol"]}")
             return [0.5,0.5,0.5]
@@ -65,4 +64,3 @@ class Visualizer():
         """Goes through a molecule and stores atom and color info from molecule into plotter for future rendering"""
         for atom in molecule.atoms:
             self.plotter.add_mesh(mesh=self.get_sphere_mesh_from_atom(atom), color=self.get_color_from_atom(atom))
-    
